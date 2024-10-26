@@ -1,5 +1,4 @@
 const { MongoClient } = require('mongodb');
-
 class Database {
     constructor() {
         this.client = null;
@@ -7,7 +6,7 @@ class Database {
     }
 
     async connect() {
-        const uri = 'mongodb://localhost:27017';
+        const uri = process.env.MONGO_URI;
 
         this.client = new MongoClient(uri);
 

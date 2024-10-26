@@ -1,5 +1,5 @@
 const app = require('./app');
 
-app.listen(3000, () => {
-    console.log(`Sevidor iniciado na porta 3000`);
+app.listen(process.env.API_SERVER, () => {
+    console.log(`Sevidor iniciado na porta ${process.env.API_SERVER}`);
 });
