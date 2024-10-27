@@ -1,22 +1,21 @@
 const { Router } = require('express');
-const Farmer = require('../models/Farmer');
+const FarmerController = require('../controllers/Farmer');
+const FarmController = require('../controllers/Farm');
 
-const routes = Router();
+const router = Router();
 
-routes.route("/")
-    .get((req, res) => {
-        return res.json("Hello World")
-    })
+router.post('/farmers', FarmerController.createFarmer);
+router.get('/farmers', FarmerController.getAllFarmers);
+router.get('/farmers/:id', FarmerController.getFarmerById);
+router.put('/farmers/:id', FarmerController.updateFarmer);
+router.delete('/farmers/:id', FarmerController.deleteFarmer);
+router.get('/farmers/:id/farms', FarmerController.getFarmsByFarmerId);
 
-routes.route("/farmer")
-    .post(async (req, res) => {
-        try {
-            const farmer = await Farmer.create(req.body);
-            res.status(201).send(farmer);
-        } catch (error) {
-            res.status(400).send({ error: error.message });
-        }
-    })
+router.post('/farms', FarmController.createFarm);
+router.get('/farms', FarmController.getAllFarms);
+router.get('/farms/:id', FarmController.getFarmById);
+router.put('/farms/:id', FarmController.updateFarm);
+router.delete('/farms/:id', FarmController.deleteFarm);
 
 
-module.exports = routes;
+module.exports = router;
