@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 const database = require('../config/database');
 
 class Farmer {
-    constructor(name, age, farmName) {
+    constructor(name, age) {
         this.name = name;
         this.age = age;
     }

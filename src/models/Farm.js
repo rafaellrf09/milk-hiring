@@ -25,6 +25,12 @@ class Farm {
         return { id: result.insertedId, ...farm };
     }
 
+    // Método para encontrar todas as fazendas
+    static async findAll() {
+        const db = database.getDB();
+        return await db.collection('farms').find({}).toArray();
+    }
+
     // Método para encontrar todas as fazendas de um fazendeiro
     static async findByFarmerId(farmerId) {
         const db = database.getDB();
