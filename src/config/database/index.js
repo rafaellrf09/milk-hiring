@@ -12,7 +12,7 @@ class Database {
 
         try {
             await this.client.connect();
-            this.db = this.client.db(); // Use o banco de dados padrão
+            this.db = this.client.db(process.env.MONGO_DB_NAME); // Use o banco de dados padrão
             console.log('MongoDB conectado com sucesso');
         } catch (error) {
             console.error('Erro ao conectar ao MongoDB:', error);
