@@ -6,12 +6,11 @@ class Farmer {
     constructor(name, age, farmName) {
         this.name = name;
         this.age = age;
-        this.farmName = farmName;
     }
 
     // Validação de dados
     static validate(farmer) {
-        if (!farmer.name || !farmer.age || !farmer.farmName) {
+        if (!farmer.name || !farmer.age) {
             throw new Error('Todos os campos são obrigatórios.');
         }
     }
@@ -20,7 +19,7 @@ class Farmer {
     static async create(farmerData) {
         this.validate(farmerData);
         const db = database.getDB();
-        const farmer = new Farmer(farmerData.name, farmerData.age, farmerData.farmName);
+        const farmer = new Farmer(farmerData.name, farmerData.age);
         const result = await db.collection('farmers').insertOne(farmer);
         return { id: result.insertedId, ...farmer };
     }
@@ -57,6 +56,11 @@ class Farmer {
         const result = await db.collection('farmers').deleteOne({ _id: ObjectId(id) });
         if (result.deletedCount === 0) throw new Error('Fazendeiro não encontrado.');
         return { id };
+    }
+
+    // Método para obter todas as fazendas associadas ao fazendeiro
+    async getFarms() {
+        return await Farm.findByFarmerId(this._id);
     }
 }
 
