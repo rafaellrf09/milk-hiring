@@ -21,6 +21,8 @@ router.delete('/farms/:id', FarmController.deleteFarm);
 router.post('/milk-productions', MilkProductionController.create);
 router.get('/milk-productions/:farmId', MilkProductionController.getByFarm);
 router.get('/milk-productions/:farmId/month', MilkProductionController.getByFarmAndMonth);
+router.get('/milk-price/:farmId', MilkProductionController.calculateMilkPrice);
+router.get('/milk-price/yearly/:farmId', MilkProductionController.calculateYearlyMilkPrice);
 router.put('/milk-productions/:id', MilkProductionController.update);
 router.delete('/milk-productions/:id', MilkProductionController.delete);
 
