@@ -58,12 +58,12 @@ class MilkProduction {
     }
 
     // Método para buscar produções de leite por fazenda e mês
-    static async findByFarmIdAndMonth(farmId, month) {
+    static async findByFarmIdAndMonth(farmId, date) {
         const db = database.getDB();
         const query = { farmId: ObjectId.createFromHexString(farmId) };
 
-        const startDate = startOfMonth(new Date(month)); 
-        const endDate = endOfMonth(new Date(month));       
+        const startDate = startOfMonth(new Date(date)); 
+        const endDate = endOfMonth(new Date(date));       
 
         query.date = { $gte: startDate, $lte: endDate };
 
